@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div>
+    <form action="#">
+      <input class="name" type="text" placeholder="Имя">
+      <input class="phone" type="text" placeholder="Телефон">
+      <input class="mail" type="text" placeholder="E-mail">
+      <br>
+      <textarea class="message" name="message" cols="30" rows="10" placeholder="Введите текст сообщения"></textarea>
+      <br>
+      <div class="error"></div>
+      <button>Отправить</button>
+    </form>
+  </div>
+  <script>
+    'use strict';
+
+    const formEl = document.querySelector('form');
+    const errorEl = document.querySelector('.error');
+    const nameEl = document.querySelector('.name');
+    const phoneEl = document.querySelector('.phone');
+    const mailEl = document.querySelector('.mail');
+    const messageEl = document.querySelector('.message');
+  
+    formEl.addEventListener('submit', event => {
+      if (!nameEl.value.match(/[a-zа-яА-ЯёЁ]+/i) || nameEl.value === '') {
+        event.preventDefault();
+        errorEl.textContent = 'Имя не должно быть пустым и должно содержать только буквы';
+        nameEl.classList.add('border');
+      } else if (phoneEl.value === '') {
+        event.preventDefault();
+        errorEl.textContent = 'Номер телефона не должен быть пустым';
+        phoneEl.classList.add('border');
+      } else if (!phoneEl.value.match(/^\+\d{1}\(\d{3}\)\d{3}\-\d{4}$/)) {
+        event.preventDefault();
+        errorEl.textContent = 'Номер телефона должен быть заполнен в следующем формате  +7(000)000-0000';
+        phoneEl.classList.add('border');
+      } else if (mailEl.value === '') {
+        event.preventDefault();
+        errorEl.textContent = 'e-mail не должен быть пустым';
+        mailEl.classList.add('border');
+      } else if (!mailEl.value.match(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/)) {
+        event.preventDefault();
+        errorEl.textContent = 'e-mail введен некорректно';
+        mailEl.classList.add('border');
+      } else if (messageEl.value === '') {
+        event.preventDefault();
+        errorEl.textContent = 'Введите пожалуйста текст';
+        messageEl.classList.add('border');
+      }
+    });
+    nameEl.addEventListener('input', event => {
+      nameEl.classList.remove('border');
+    });
+    phoneEl.addEventListener('input', event => {
+      phoneEl.classList.remove('border');
+    });
+    mailEl.addEventListener('input', event => {
+      mailEl.classList.remove('border');
+    });
+    messageEl.addEventListener('input', event => {
+      messageEl.classList.remove('border');
+    });
+
+
+    const text1 = `One: 'Hi Mary.' Two: 'Oh, hi.'
+One: 'How are you doing?'
+Two: 'I'm doing alright. How about you?'
+One: 'Not too bad. The weather is great isn't it?'
+Two: 'Yes. It's absolutely beautiful today.'
+One: 'I wish it was like this more frequently.'
+Two: 'Me too.'
+One: 'So where are you going now?'
+Two: 'I'm going to meet a friend of mine at the department store'
+One: 'Going to do a little shopping?'
+Two: 'Yeah, I have to buy some presents for my parents.'
+One: 'What's the occasion?'
+Two: 'It's their anniversary.'
+One: 'That's great. Well, you better get going. You don't want to be late.'
+Two: 'I'll see you next time.'
+One: 'Sure.' Bye.'`;
+
+    console.log(text1.replace(/'/g, '"'));
+
+    const text2 = `One: 'Hi Mary.' Two: 'Oh, hi.'
+One: 'How are you doing?'
+Two: 'I'm doing alright. How about you?'
+One: 'Not too bad. The weather is great isn't it?'
+Two: 'Yes. It's absolutely beautiful today.'
+One: 'I wish it was like this more frequently.'
+Two: 'Me too.'
+One: 'So where are you going now?'
+Two: 'I'm going to meet a friend of mine at the department store'
+One: 'Going to do a little shopping?'
+Two: 'Yeah, I have to buy some presents for my parents.'
+One: 'What's the occasion?'
+Two: 'It's their anniversary.'
+One: 'That's great. Well, you better get going. You don't want to be late.'
+Two: 'I'll see you next time.'
+One: 'Sure.' Bye.'`;
+
+    console.log(text2.replace(/\B'/g, '"'));
+
+  </script>
+</body>
+
+</html>
